@@ -1,5 +1,6 @@
 pro plotss
 ;signal to noise plots 
+; imports all images for program to manipulate and saves in an array
   sum1 = readfits('004SUM.fits')
   sum2 = readfits('008SUM.fits')
   sum3 = readfits('012SUM.fits')
@@ -32,6 +33,7 @@ pro plotss
   diff15 = readfits('060DIFF.fits')
   
   arrsum = fltarr(15)
+; x axis, used to calculate mean signal
   arrsum[0] = mean(sum1)
   arrsum[1] = mean(sum2)
   arrsum[2] = mean(sum3)
@@ -49,6 +51,7 @@ pro plotss
   arrsum[14] = mean(sum15)
   
   arrvar = fltarr(15)
+; calculates varience for the y axis
   arrvar[0] = variance(diff1)
   arrvar[1] = variance(diff2)
   arrvar[2] = variance(diff3)
@@ -64,7 +67,7 @@ pro plotss
   arrvar[12] = variance(diff13)
   arrvar[13] = variance(diff14)
   arrvar[14] = variance(diff15)
-  
+  ;plots values
   plot,arrsum,arrvar , title = 'Detector Lab', psym = 1
   
   end
